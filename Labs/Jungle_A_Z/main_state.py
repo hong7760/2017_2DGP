@@ -6,54 +6,27 @@ from pico2d import *
 
 import game_framework
 import title_state
-import pause_game
-
-
+from retsim import Retsim
+from forest import Forest
 name = "MainState"
 
-boy = None
-grass = None
+
 font = None
 
 
-class Grass:
-    def __init__(self):
-        self.image = load_image('grass.png')
-
-    def draw(self):
-        self.image.draw(400, 30)
-
-
-class Boy:
-    def __init__(self):
-        self.x, self.y = 0, 90
-        self.frame = 0
-        self.image = load_image('run_animation.png')
-        self.dir = 1
-
-    def update(self):
-        self.frame = (self.frame + 1) % 8
-        self.x += self.dir
-        if self.x >= 800:
-            self.dir = -1
-        elif self.x <= 0:
-            self.dir = 1
-
-    def draw(self):
-        self.image.clip_draw(self.frame * 100, 0, 100, 100, self.x, self.y)
-
 
 def enter():
-    global boy, grass
-    boy = Boy()
-    grass = Grass()
-
+    open_canvas(sync= True)
+    global forest
+    global retsim
+    retsim = Retsim()
+    forest = Forest()
 
 def exit():
-    global boy, grass
-    del(boy)
-    del(grass)
-
+    global retsim, forest
+    del(retsim)
+    del(forest)
+    close_canvas()
 
 def pause():
     pass
@@ -68,21 +41,22 @@ def handle_events():
     for event in events:
         if event.type == SDL_QUIT:
             game_framework.quit()
-        elif event.type == SDL_KEYDOWN and event.key == SDLK_ESCAPE:
-            game_framework.change_state(title_state)
-        elif event.type == SDL_KEYDOWN and event.key == SDLK_p:
-            game_framework.push_state(pause_game)
+        else:
+            if event.type == SDL_KEYDOWN and event.key == SDLK_ESCAPE:
+                game_framework.change_state(title_state)
+            else:
+                retsim.handle_event(event)
 
 
 def update():
-    boy.update()
-
+    retsim.update()
+    forest.update()
 
 def draw():
     clear_canvas()
-    pause_draw()
+    forest.draw()
+    retsim.draw()
     update_canvas()
 
 def pause_draw():
-    grass.draw()
-    boy.draw()
+    pass
