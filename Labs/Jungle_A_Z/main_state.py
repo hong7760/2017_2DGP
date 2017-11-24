@@ -47,6 +47,7 @@ def handle_events(frame_time):
             else:
                 retsim.handle_event(event)
                 forest.handle_event(event)
+                ui.handle_event(event)
 
 
 def update(frame_time):
