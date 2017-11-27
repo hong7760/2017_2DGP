@@ -48,6 +48,11 @@ class Ui:
         if Ui.cold_bar_image == None:
             Ui.cold_bar_image = load_image('./resource/cold_bar.png')
 
+        Ui.bar_tool_image.opacify(self.invisible)
+        Ui.hp_bar_image.opacify(self.invisible)
+        Ui.stamina_bar_image.opacify(self.invisible)
+        Ui.cold_bar_image.opacify(self.invisible)
+
     def set_inventory_image(self):
         if Ui.inven_image == None:
             Ui.inven_image = load_image('./resource/inven_idle.png')
@@ -67,11 +72,6 @@ class Ui:
 
         self.bar_tool_image.draw(650, 100)
         self.cold_bar_image.clip_draw(0, 0, int(176 * self.cold / 100), 17, 650 - 88 + int(88 * self.cold / 100), 100)
-
-        Ui.bar_tool_image.opacify(self.invisible)
-        Ui.hp_bar_image.opacify(self.invisible)
-        Ui.stamina_bar_image.opacify(self.invisible)
-        Ui.cold_bar_image.opacify(self.invisible)
 
     def draw_inventory(self):
         pass

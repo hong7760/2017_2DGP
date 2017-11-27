@@ -15,37 +15,36 @@ class Retsim:
     image = None
 
     DOWN, LEFT, UP, RIGHT = 0, 1, 2, 3
-    RUN = False
     def __init__(self):
         self.x, self.y = 960, 960
         self.frame = 0
         self.state = self.DOWN
-        self.RUN = False
+        self.run = False
         self.total_frames = 0.0
         self. hp, self.stamina, self.cold = 100,100,100
         if Retsim.image == None:
             Retsim.image = load_image('./resource/Retsim.png')
 
     def handle_left_run(self, frame_time):
-        if self.RUN == True:
+        if self.run == True:
             self.total_frames += Retsim.TIME_PER_ACTION * Retsim.FRAMES_PER_ACTION * frame_time
             self.frame = int(self.total_frames) % 4
             self.x = max(400, self.x - Retsim.RUN_SPEED_PPS * frame_time)
 
     def handle_up_run(self, frame_time):
-        if self.RUN == True:
+        if self.run == True:
             self.total_frames += Retsim.TIME_PER_ACTION * Retsim.FRAMES_PER_ACTION * frame_time
             self.frame = int(self.total_frames) % 4
             self.y = min(1620, self.y + Retsim.RUN_SPEED_PPS * frame_time)
 
     def handle_down_run(self, frame_time):
-        if self.RUN == True:
+        if self.run == True:
             self.total_frames += Retsim.TIME_PER_ACTION * Retsim.FRAMES_PER_ACTION * frame_time
             self.frame = int(self.total_frames) % 4
             self.y = max(300, self.y - Retsim.RUN_SPEED_PPS * frame_time)
 
     def handle_right_run(self, frame_time):
-        if self.RUN == True:
+        if self.run == True:
             self.total_frames += Retsim.TIME_PER_ACTION * Retsim.FRAMES_PER_ACTION * frame_time
             self.frame = int(self.total_frames) % 4
             self.x = min(1520, self.x + Retsim.RUN_SPEED_PPS * frame_time)
@@ -75,30 +74,30 @@ class Retsim:
     def handle_event(self, event):
         if (event.type, event.key) == (SDL_KEYDOWN, SDLK_a):
             self.state = self.LEFT
-            self.RUN = True
+            self.run = True
         elif (event.type, event.key) == (SDL_KEYDOWN, SDLK_s):
             self.state = self.DOWN
-            self.RUN = True
+            self.run = True
         elif (event.type, event.key) == (SDL_KEYDOWN, SDLK_w):
             self.state = self.UP
-            self.RUN = True
+            self.run = True
         elif (event.type, event.key) == (SDL_KEYDOWN, SDLK_d):
             self.state = self.RIGHT
-            self.RUN = True
+            self.run = True
 
         elif (event.type, event.key) == (SDL_KEYUP, SDLK_a):
             if self.state == self.LEFT:
-                self.RUN = False
+                self.run = False
                 self.frame = 1
         elif (event.type, event.key) == (SDL_KEYUP, SDLK_s):
             if self.state == self.DOWN:
-                self.RUN = False
+                self.run = False
                 self.frame = 1
         elif (event.type, event.key) == (SDL_KEYUP, SDLK_w):
             if self.state == self.UP:
-                self.RUN = False
+                self.run = False
                 self.frame = 1
         elif (event.type, event.key) == (SDL_KEYUP, SDLK_d):
             if self.state == self.RIGHT:
-                self.RUN = False
+                self.run = False
                 self.frame = 1

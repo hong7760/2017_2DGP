@@ -5,6 +5,7 @@ class Forest:
     image = None
     TILE_SIZE = 48
     MAP_SIZE = 1920
+
     def __init__(self):
         if Forest.image == None:
             Forest.image = load_image('./resource/Map.png')
