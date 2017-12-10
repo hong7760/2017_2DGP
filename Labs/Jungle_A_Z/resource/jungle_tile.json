@@ -1,0 +1,12 @@
+{ "columns":20,
+ "image":"./resource/jungle_tile.png",
+ "imageheight":624,
+ "imagewidth":960,
+ "margin":0,
+ "name":"Jungle",
+ "spacing":0,
+ "tilecount":260,
+ "tileheight":48,
+ "tilewidth":48,
+ "type":"tileset"
+}

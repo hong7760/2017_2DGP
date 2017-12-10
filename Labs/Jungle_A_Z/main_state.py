@@ -22,6 +22,8 @@ def enter():
     forest = Forest()
     ui = Ui()
 
+    forest.set_center_object(retsim)
+
 def exit():
     global retsim, forest, ui
     del(retsim)
